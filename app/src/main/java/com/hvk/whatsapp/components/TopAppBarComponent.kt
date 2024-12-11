@@ -23,7 +23,7 @@ fun TopAppBarComponent() {
             Text(
                 text = "WhatsApp Clone",
                 style = TextStyle(
-                    fontSize = 20.sp,
+                    fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
                 )

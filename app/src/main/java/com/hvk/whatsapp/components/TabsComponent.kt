@@ -2,6 +2,8 @@ package com.hvk.whatsapp.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -17,7 +19,10 @@ import com.hvk.whatsapp.data.tabs
 import com.hvk.whatsapp.ui.theme.WhatsAppComposeCloneTheme
 
 @Composable
-fun TabsComponent() {
+fun TabsComponent(
+    pagerState: PagerState,
+    onTabSelected: (selectedTab: Int) -> Unit
+) {
 
     var selectedIndex by remember { mutableIntStateOf(0) }
 
@@ -28,7 +33,10 @@ fun TabsComponent() {
         tabs.forEachIndexed { index, tabData ->
             Tab(
                 selected = index == selectedIndex,
-                onClick = { selectedIndex = index },
+                onClick = {
+                    selectedIndex = index
+                    onTabSelected(index)
+                },
                 modifier = Modifier.height(56.dp)
             ) {
                 Text(tabData.title)
@@ -41,6 +49,8 @@ fun TabsComponent() {
 @Composable
 private fun Preview() {
     WhatsAppComposeCloneTheme {
-        TabsComponent()
+        TabsComponent(rememberPagerState { tabs.size }) {
+
+        }
     }
 }
