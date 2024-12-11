@@ -1,19 +1,16 @@
 package com.hvk.whatsapp.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.SideEffect
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Gray,
-    secondary = LightGray,
+    primary = LightGreen,
+    secondary = Gray,
     tertiary = Black
 )
 
@@ -41,6 +38,15 @@ fun WhatsAppComposeCloneTheme(
     val colorScheme = when {
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
+    }
+
+    val systemUiController = rememberSystemUiController()
+    val statusBarColor = if (darkTheme) Gray else Green
+    val navigationBarColor = if (darkTheme) LightGray else White
+
+    SideEffect {
+        systemUiController.setStatusBarColor(statusBarColor)
+        systemUiController.setNavigationBarColor(navigationBarColor)
     }
 
     MaterialTheme(
